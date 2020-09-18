@@ -1,0 +1,57 @@
+<style>
+  .image-gallery-index {display: flex; flex-direction: row;}
+  .image-gallery-index a {
+    width: 100%;
+    margin: 0 0 0 0;
+    text-decoration: none !important;
+    position: relative;
+  }
+  .image-gallery-index a .galimg {
+    padding-top:75%;
+    background-repeat: no-repeat;
+    background-size: cover; /**cover contain**/
+    background-position: center;
+    }
+  .galimg .titleBox {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #000;
+        background: rgba(0, 0, 0, 0.5);
+        color: #FFF;
+        padding: 10px;
+        text-align: center;
+        display:none;
+    }
+  .galimg:hover .titleBox {
+        margin-bottom: 0;
+        display:block;
+    }
+</style>
+
+
+{% comment %}-----------------
+  - This page receives a gallery index (include.gallery)
+  - It then assign the gallery[include.gallery] to the rows variable
+%}-----------------{% endcomment %}
+{% assign rows = page.galleries[include.gallery] %}
+
+{% comment %}%}-----------------
+  We now loop over rows
+%}-----------------{% endcomment %}
+<div class="image-gallery-full">
+{% for row in rows %}
+<div class="image-gallery-index">
+    {% comment %}%}-----------------
+      and then loop over images in row
+    %}-----------------{% endcomment %}
+    {% for item in row %}
+    <a class="lightbox-image gallery" href="{{page.imgfolder}}{{item.image}}" title="{{ item.title }}">
+      <div class="galimg" style="background-image:url({{site.baseurl}}{{page.imgfolder}}{{item.thumb}})" title="{{ item.title }}">
+        <div class="titleBox">{{item.title}}</div>
+      </div></a>
+    {% endfor %}
+   </div>
+{% endfor %}
+</div>

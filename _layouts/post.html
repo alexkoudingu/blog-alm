@@ -1,0 +1,37 @@
+---
+layout: default
+---
+<div class="flex-container">
+  {% include header.html %}
+  <article class="article-page">
+    <div class="page-image">
+      <div class="cover-image" style="background: url({{page.img}}) center no-repeat; background-size: cover;"></div>
+    </div>
+    <div class="wrapper">
+      <div class="page-content">
+        <div class="header-page">
+          <h1 class="page-title">{{page.title}}</h1>
+          <div class="page-date">
+            <time datetime="{{page.date}}">{{page.date | date: '%d %b %Y'}}</time>
+            {% if page.update %}
+              <time datetime="{{page.update}}">(maj le {{page.update | date: '%d%b%Y' }})</time>
+            {% endif %}
+          </div>
+        </div>
+        {{page.content | markdownify}}
+        <div class="page-footer">
+          <div class="page-tag">
+            <span>Tags:</span>
+            {% for tag in page.tags %}
+            <a href="{{site.baseurl}}/tags#{{tag}}" class="tag">| {{ tag }}</a>
+            {% endfor %}
+          </div><!-- End Tags -->
+        </div>
+      </div>
+    </div> <!-- End Wrapper -->
+  </article>
+  {% include search.html %}
+  {% include footer.html %}
+</div>
+<script type="text/javascript" src="/assets/js/lightbox.js"></script>
+<link rel="stylesheet" href="/assets/css/lightbox.css">
